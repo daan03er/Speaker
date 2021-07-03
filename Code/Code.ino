@@ -5,9 +5,9 @@
 #include "DFRobotDFPlayerMini.h"
 
 #define busy 7
-
-static const uint8_t PIN_MP3_TX = 2; // Connects to module's RX
-static const uint8_t PIN_MP3_RX = 3; // Connects to module's TX
+//change pins 2 and 3 in current breadbaord hardware configuration
+static const uint8_t PIN_MP3_TX = 3; // Connects to module's RX
+static const uint8_t PIN_MP3_RX = 2; // Connects to module's TX
 				     //use pins 2 and 3 to communicate with dfminplayer 
 
 SoftwareSerial softwareSerial(PIN_MP3_RX, PIN_MP3_TX);
