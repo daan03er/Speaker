@@ -27,12 +27,6 @@
 //use pins 4 and 5 to communicate with dfminiplayer
 static const uint8_t PIN_MP3_TX = 4; // Connects to module's RX
 static const uint8_t PIN_MP3_RX = 5; // Connects to module's TX
-=======
-//change pins 2 and 3 in current breadbaord hardware configuration
-static const uint8_t PIN_MP3_TX = 3; // Connects to module's RX
-static const uint8_t PIN_MP3_RX = 2; // Connects to module's TX
-				     //use pins 2 and 3 to communicate with dfminplayer 
->>>>>>> f7f90feebd32f86cc7a03b8f56e3d0b07bb15ab1
 
 SoftwareSerial softwareSerial(PIN_MP3_RX, PIN_MP3_TX);
 DFRobotDFPlayerMini player;
