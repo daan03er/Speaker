@@ -6,7 +6,6 @@
 
 //extra pin 
 #define busy 7
-<<<<<<< HEAD
 #define interruptPin 2
 
 //pins for buttons
