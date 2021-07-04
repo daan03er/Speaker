@@ -31,8 +31,10 @@ SoftwareSerial softwareSerial(PIN_MP3_RX, PIN_MP3_TX);
 DFRobotDFPlayerMini player;
 
 volatile byte state = LOW;
+int button_data_array[5]; 
 int teller = 1; //teller used for playing next song
 
+//setup function for serial connection to the dfminiplayer
 void setup_serial(){
   Serial.begin(9600); //init usb serial for debugging
   softwareSerial.begin(9600); //init serial port for dfminiplayer
@@ -48,18 +50,21 @@ void setup_serial(){
   }
 }
 
+//setup function for all the input & output pins
 void setup_pins(){
   pinMode(busy, INPUT);
 }
 
+//function for setting up the interrupt used for buttons
 void setup_interrupt(){
-  pinMode(interrupt_pin, INPUT_PULLUP); 
-  attachInterrupt(digitalPinToInterrupt(interruptPin), read, CHANGE); 
+  pinMode(interruptPin, INPUT_PULLUP); 
+  attachInterrupt(digitalPinToInterrupt(interruptPin), interrupt_extra, CHANGE); 
 }
 
 void setup() {
   setup_pins(); 
   setup_serial(); 
+  setup_interrupt(); 
 }
 
 void loop() {
@@ -76,8 +81,12 @@ void loop() {
 
 //reading the 5 individual buttons and returning the high or low boolean of every button
 //since only 2 pins can be used for interrupt, all the buttons are connected to pin 2 for the interrupt and a separate pin for the data
-int read_button(){
-  digitalRead(
+int read_buttons(){
+  int buttonRead = 9;   
+  for( int counter = 0; counter < 6; counter++){
+    button_data_array[counter] = digitalRead(buttonRead + counter); 
+  }
+  return button_data_array; 
 }
 
 //function for writing or commanding to the display, with 2 parameters
@@ -87,6 +96,7 @@ void write_display(boolean RW, int info){
 }
 
 //used for interrupt function, changing the state 
-void read(){
+void interrupt_extra(){
   state = !state; 
+  read_buttons(); 
 }
